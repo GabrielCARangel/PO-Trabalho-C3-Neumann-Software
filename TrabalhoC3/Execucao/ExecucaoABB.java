@@ -8,31 +8,34 @@ import java.text.SimpleDateFormat;
 public class ExecucaoABB {
 
     public static void executarABB (String nomeArquivo) {
+        try{
+            ArvoreABB arvoreBalanceada;
+            ArrayList<NoABB> vetorOrdenado = new ArrayList<>();
+            double[] resultadoTempos = new double[5];
+            double tempoInicial = 0, tempoFinal = 0;
 
-        ArvoreABB arvoreBalanceada;
-        ArrayList<NoABB> vetorOrdenado = new ArrayList<>();
-        double[] resultadoTempos = new double[5];
-        double tempoInicial = 0, tempoFinal = 0;
+            for (byte contador = 0; contador < resultadoTempos.length; contador++) {
 
-        for (byte contador = 0; contador < resultadoTempos.length; contador++) {
+                tempoInicial = System.nanoTime();
+                arvoreBalanceada = new ArvoreABB();
+                
+                for (int contadorInsercao = 0; contadorInsercao < AplicativoTeste.compra.getVetorCompra().size(); contadorInsercao++) {
 
-            tempoInicial = System.nanoTime();
-            arvoreBalanceada = new ArvoreABB();
-            
-            for (int contadorInsercao = 0; contadorInsercao < AplicativoTeste.compra.getVetorCompra().size(); contadorInsercao++) {
+                    arvoreBalanceada.inserir(AplicativoTeste.compra.getVetorCompra().get(contadorInsercao));
+                }
 
-                arvoreBalanceada.inserir(AplicativoTeste.compra.getVetorCompra().get(contadorInsercao));
+                vetorOrdenado = arvoreBalanceada.emOrdem();
+                arvoreBalanceada = arvoreBalanceada.balancear(vetorOrdenado);
+                pesquisarABB(nomeArquivo, arvoreBalanceada);
+
+                tempoFinal = System.nanoTime();
+                resultadoTempos[contador] = tempoFinal - tempoInicial;
             }
 
-            vetorOrdenado = arvoreBalanceada.emOrdem();
-            arvoreBalanceada = arvoreBalanceada.balancear(vetorOrdenado);
-            pesquisarABB(nomeArquivo, arvoreBalanceada);
-
-            tempoFinal = System.nanoTime();
-            resultadoTempos[contador] = tempoFinal - tempoInicial;
+            AplicativoTeste.gravarTempoPesquisa("Árvore ABB", nomeArquivo, resultadoTempos);
+        }catch(StackOverflowError e){
+            System.out.print("\nABB StackOverflow");
         }
-
-        AplicativoTeste.gravarTempoPesquisa("Árvore ABB", nomeArquivo, resultadoTempos);
     }
 
     private static void pesquisarABB (String nomeArquivo, ArvoreABB arvoreBalanceada) {

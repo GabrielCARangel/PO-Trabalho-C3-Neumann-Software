@@ -93,10 +93,13 @@ public class AplicativoTeste {
 	}
 
 	private static void execucaoTipoLote (String nomeArquivo) {
-
-		//ExecucaoABB.executarABB(nomeArquivo);
+		try{
+			ExecucaoABB.executarABB(nomeArquivo);
+		}catch(StackOverflowError e){
+			System.out.print(e.getMessage());
+		}
 		ExecucaoAVL.executarAVL(nomeArquivo);
-		//ExecucaoHash.executarHash(nomeArquivo);
+		ExecucaoHash.executarHash(nomeArquivo);
 	}
 	
 	private static void lerDados (CadastraCompra compra, String nomeLeitura) {

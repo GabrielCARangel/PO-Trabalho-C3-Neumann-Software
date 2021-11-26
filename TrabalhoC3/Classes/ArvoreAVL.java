@@ -118,7 +118,8 @@ public class ArvoreAVL {
 
     private NoAVL rotacaoDireita(NoAVL no) {
 
-        NoAVL auxiliar01 = no.getItemEsquerdo(), auxiliar02;
+        NoAVL auxiliar01, auxiliar02;
+        auxiliar01 = no.getItemEsquerdo();
 
         if (auxiliar01.getFatorBalanceamento() == -1) {
 
@@ -126,7 +127,6 @@ public class ArvoreAVL {
             auxiliar01.setItemDireita(no);
             no.setFatorBalanceamento((byte) 0);
             no = auxiliar01;
-
         } else {
 
             auxiliar02 = auxiliar01.getItemDireita();
@@ -138,26 +138,24 @@ public class ArvoreAVL {
             if (auxiliar02.getFatorBalanceamento() == -1) {
 
                 no.setFatorBalanceamento((byte) 1);
-
             } else {
 
                 no.setFatorBalanceamento((byte) 0);
-
             }
+
             if (auxiliar02.getFatorBalanceamento() == 1) {
 
                 auxiliar01.setFatorBalanceamento((byte) -1);
-
             } else {
 
                 auxiliar01.setFatorBalanceamento((byte) 0);
-                no = auxiliar02;
             }
+
+            no = auxiliar02;
         }
 
         no.setFatorBalanceamento((byte) 0);
         this.controle = false;
-
         return no;
     }
 
@@ -197,13 +195,13 @@ public class ArvoreAVL {
             } else {
 
                 auxiliar01.setFatorBalanceamento((byte) 0);
-                no = auxiliar02;
+                
             }
+            no = auxiliar02;
         }
 
         no.setFatorBalanceamento((byte) 0);
         controle = false;
-
         return no;
     }
 

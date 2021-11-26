@@ -31,7 +31,7 @@ public class AplicativoTeste {
         lerDados(compra, "TrabalhoC3/Dados/500_Aleatorios.txt");	
 		execucaoTipoLote("500_Aleatorio.txt");
 
-		/*System.out.print("\nExecutando os métodos de pesquisa em 500 dados invertidos.");
+		System.out.print("\nExecutando os métodos de pesquisa em 500 dados invertidos.");
         lerDados(compra, "TrabalhoC3/Dados/500_Invertidos.txt");	
 		execucaoTipoLote("500_Invertidos.txt");
 
@@ -88,15 +88,15 @@ public class AplicativoTeste {
 		execucaoTipoLote("50000_Ordenados.txt");
 		
 		System.out.print("\n\nTodos os dados de clientes estão contidos na pasta 'ResultadoCompras'.");
-		System.out.print("\nTodos os tempos e resultados finais estão contidos na pasta 'ResultadoTempos'.");*/
+		System.out.print("\nTodos os tempos e resultados finais estão contidos na pasta 'ResultadoTempos'.");
 		
 	}
 
 	private static void execucaoTipoLote (String nomeArquivo) {
 
-		ExecucaoABB.executarABB(nomeArquivo);
+		//ExecucaoABB.executarABB(nomeArquivo);
 		ExecucaoAVL.executarAVL(nomeArquivo);
-		ExecucaoHash.executarHash(nomeArquivo);
+		//ExecucaoHash.executarHash(nomeArquivo);
 	}
 	
 	private static void lerDados (CadastraCompra compra, String nomeLeitura) {

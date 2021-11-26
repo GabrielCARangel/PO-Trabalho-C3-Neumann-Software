@@ -9,9 +9,6 @@ public class NoAVL {
     private NoAVL esquerda, direita; 
     private byte fatorBalanceamento; 
     
-    public NoAVL() {
-        
-    }
     NoAVL (long CPF) {
 
         this.informacao = new ArrayList<>();
@@ -47,7 +44,7 @@ public class NoAVL {
         return this.fatorBalanceamento;
     } 
     
-    public void setFatorBalanceamento (byte novoFatorBalanceamento) {
+    protected void setFatorBalanceamento (byte novoFatorBalanceamento) {
 
         this.fatorBalanceamento = novoFatorBalanceamento;
     } 

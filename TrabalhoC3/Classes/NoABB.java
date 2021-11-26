@@ -8,9 +8,6 @@ public class NoABB {
     private long CPF;
     private NoABB direita, esquerda;
 
-    public NoABB(){
-        
-    }
     public NoABB (long CPF) {
 
         this.CPF = CPF;

@@ -116,6 +116,7 @@ public class ArvoreABB {
         if (fim >= inicio) {
 
             meio = fim + inicio / 2;
+            //mudar
             vetor.get(meio).getInformacao().forEach((compra) -> arvore.inserir(compra));
             fazerBalanceamento(vetor, arvore, inicio, meio - 1);
             fazerBalanceamento(vetor, arvore, meio + 1, fim);

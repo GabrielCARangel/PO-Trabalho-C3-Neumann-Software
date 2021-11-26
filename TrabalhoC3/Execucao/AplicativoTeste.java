@@ -94,9 +94,9 @@ public class AplicativoTeste {
 
 	private static void execucaoTipoLote (String nomeArquivo) {
 
-		ExecucaoABB.executar(nomeArquivo, compra);
-		ExecucaoAVL.executar(nomeArquivo, compra);
-		//ExecucaoHash.executar();
+		ExecucaoABB.executarABB(nomeArquivo);
+		ExecucaoAVL.executarAVL(nomeArquivo);
+		ExecucaoHash.executarHash(nomeArquivo);
 	}
 	
 	private static void lerDados (CadastraCompra compra, String nomeLeitura) {

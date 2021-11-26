@@ -2,63 +2,79 @@ package TrabalhoC3.Execucao;
 
 import TrabalhoC3.Classes.*;
 import TrabalhoC3.Manipuladores.*;
-import java.io.FileNotFoundException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class ExecucaoHash {
-    
-    public static void executar() {
-        
-        CadastraCompra compra = new CadastraCompra();
-        lerDados(compra, "TrabalhoC3/Dados/500_Aleatorios.txt");
-        ListaHash lista = new ListaHash(compra.getVetorCompra().size());
 
-        for (int contador = 0; contador < compra.getVetorCompra().size(); contador++) {
+    public static void executarHash(String nomeArquivo) {
 
-            lista.adicionarListaHash(compra.get(contador));
+        ListaHash listaHash;
+        double[] resultadoTempos = new double[5];
+        double tempoInicial = 0, tempoFinal = 0;
+
+        for (byte contador = 0; contador < resultadoTempos.length; contador++) {
+
+            tempoInicial = System.nanoTime();
+            listaHash = new ListaHash((int) ((AplicativoTeste.compra.getVetorCompra().size()) * 1.1) + 1);
+
+            for (int contadorInserir = 0; contadorInserir < AplicativoTeste.compra.getVetorCompra()
+                    .size(); contadorInserir++) {
+
+                listaHash.adicionarListaHash(AplicativoTeste.compra.get(contadorInserir));
+            }
+
+            pesquisarHash(nomeArquivo, listaHash);
+            tempoFinal = System.nanoTime();
+            resultadoTempos[contador] = tempoFinal - tempoInicial;
         }
 
-        ArrayList <Compra> auxiliar = new ArrayList<>();
+        AplicativoTeste.gravarTempoPesquisa("Lista Hash", nomeArquivo, resultadoTempos);
+    }
+
+    private static void pesquisarHash(String nomeArquivo, ListaHash listaHash) {
+
+        ArrayList<Compra> lista = new ArrayList<>();
+        GravaDados gravarArquivo = null;
+        double totalCompras = 0;
+        SimpleDateFormat dataSimples = new SimpleDateFormat("dd/MM/yyyy");
+
+        try {
+
+            gravarArquivo = new GravaDados("TrabalhoC3/ResultadoCompras/ListaHash_" + nomeArquivo, false);
+
+        } catch (Exception erro) {
+
+            System.err.print(erro);
+        }
 
         for (int contadorCPF = 0; contadorCPF < AplicativoTeste.listaCPFs.size(); contadorCPF++) {
 
-            auxiliar = lista.pesquisarCPF(AplicativoTeste.listaCPFs.get(contadorCPF));
+            lista = listaHash.pesquisarCPF(AplicativoTeste.listaCPFs.get(contadorCPF));
 
-            try {
+            if (lista.isEmpty() == false) {
 
-                if (auxiliar.get(0).getCliente().getCPF() == AplicativoTeste.listaCPFs.get(contadorCPF)) {
+                gravarArquivo.gravar("Cliente: " + (lista.get(0).getCliente().getNome()) + " | CPF: "
+                        + (lista.get(0).getCliente().getCPF()) + "\n");
 
-                    for (int contadorImpressao = 0; contadorImpressao < auxiliar.size(); contadorImpressao++) {
-                    
-                        System.out.println("\nCPF: " +auxiliar.get(contadorImpressao).getCliente().getCPF() +" | Nome: " +auxiliar.get(contadorImpressao).getCliente().getNome() +" | Valor: " +auxiliar.get(contadorImpressao).getValor());
-                    }
+                for (int contadorLista = 0; contadorLista < lista.size(); contadorLista++) {
+
+                    gravarArquivo
+                            .gravar("\n	Data: " + dataSimples.format((lista.get(contadorLista).getData().getTime()))
+                                    + "	Valor: R$ " + (lista.get(contadorLista).getValor()));
+                    totalCompras += lista.get(contadorLista).getValor();
                 }
 
-            } catch (Exception erro) {
+                gravarArquivo.gravar("\n\nTotal Geral: R$ " + totalCompras);
+                totalCompras = 0;
+                gravarArquivo.gravar(AplicativoTeste.quebraDeLinha);
 
-                System.out.println("\nO CPF " +AplicativoTeste.listaCPFs.get(contadorCPF) +" não possui compras.");
+            } else {
+
+                gravarArquivo.gravar("Não há nenhuma compra com o CPF: " + AplicativoTeste.listaCPFs.get(contadorCPF));
+                gravarArquivo.gravar(AplicativoTeste.quebraDeLinha);
             }
         }
     }
 
-    private static void lerDados (CadastraCompra compra, String nomeLeitura) {
-		
-		try {
-			LeDados arquivo = new LeDados(nomeLeitura);
-			compra.setVetorCompra(arquivo.ler());
-			arquivo.fecha();
-		
-		} catch (FileNotFoundException erro) {
-			
-			System.err.print(erro);
-
-		} catch (NumberFormatException erro) {
-			
-			System.err.print(erro);
-
-		} catch (ArrayIndexOutOfBoundsException erro) {
-			
-			System.err.print(erro);
-		}
-	}
 }

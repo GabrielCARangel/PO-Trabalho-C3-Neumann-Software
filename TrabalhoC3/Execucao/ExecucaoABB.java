@@ -7,7 +7,7 @@ import java.text.SimpleDateFormat;
 
 public class ExecucaoABB {
 
-    public static void executar (String nomeArquivo, CadastraCompra compra) {
+    public static void executarABB (String nomeArquivo) {
 
         ArvoreABB arvoreBalanceada;
         ArrayList<NoABB> vetorOrdenado = new ArrayList<>();
@@ -17,8 +17,9 @@ public class ExecucaoABB {
         for (byte contador = 0; contador < resultadoTempos.length; contador++) {
 
             tempoInicial = System.nanoTime();
-            arvoreBalanceada  = new ArvoreABB();
-            for (int contadorInsercao = 0; contadorInsercao < compra.getVetorCompra().size(); contadorInsercao++) {
+            arvoreBalanceada = new ArvoreABB();
+            
+            for (int contadorInsercao = 0; contadorInsercao < AplicativoTeste.compra.getVetorCompra().size(); contadorInsercao++) {
 
                 arvoreBalanceada.inserir(AplicativoTeste.compra.getVetorCompra().get(contadorInsercao));
             }
@@ -32,19 +33,18 @@ public class ExecucaoABB {
         }
 
         AplicativoTeste.gravarTempoPesquisa("Árvore ABB", nomeArquivo, resultadoTempos);
-        // AplicativoTeste.gravarTempoPesquisa(String tipoPesquisa, String nomeArquivo, double[] tempoResultados)
     }
 
     private static void pesquisarABB (String nomeArquivo, ArvoreABB arvoreBalanceada) {
 
-        NoABB noPesquisa = new NoABB();
+        NoABB noPesquisa;
         GravaDados gravarArquivo = null;
         double totalCompras = 0;
         SimpleDateFormat dataSimples = new SimpleDateFormat("dd/MM/yyyy");
 
         try {
         
-            gravarArquivo = new GravaDados("TrabalhoC3/ResultadoCompras/ArvoreABB" +nomeArquivo, false);
+            gravarArquivo = new GravaDados("TrabalhoC3/ResultadoCompras/ArvoreABB_" +nomeArquivo, false);
 
         } catch (Exception erro) {
 
@@ -76,4 +76,5 @@ public class ExecucaoABB {
             }
         }
     }
+    
 }

@@ -5,40 +5,41 @@ import TrabalhoC3.Classes.*;
 import TrabalhoC3.Manipuladores.GravaDados;
 
 public class ExecucaoAVL {
-    public static void executar (String nomeArquivo, CadastraCompra compra) {
 
-        ArvoreAVL arvore;
+    public static void executarAVL (String nomeArquivo) {
+
+        ArvoreAVL arvoreAVL;
         double[] resultadoTempos = new double[5];
         double tempoInicial = 0, tempoFinal = 0;
 
         for (byte contador = 0; contador < resultadoTempos.length; contador++) {
 
             tempoInicial = System.nanoTime();
-            arvore  = new ArvoreAVL();
-            for (int contadorInsercao = 0; contadorInsercao < compra.getVetorCompra().size(); contadorInsercao++) {
+            arvoreAVL = new ArvoreAVL();
+            
+            for (int contadorInsercao = 0; contadorInsercao < AplicativoTeste.compra.getVetorCompra().size(); contadorInsercao++) {
 
-                arvore.inserir(AplicativoTeste.compra.getVetorCompra().get(contadorInsercao));
+                arvoreAVL.inserir(AplicativoTeste.compra.getVetorCompra().get(contadorInsercao));
             }
-            pesquisarAVL(nomeArquivo, arvore);
 
+            pesquisarAVL(nomeArquivo, arvoreAVL);
             tempoFinal = System.nanoTime();
             resultadoTempos[contador] = tempoFinal - tempoInicial;
         }
 
         AplicativoTeste.gravarTempoPesquisa("Árvore AVL", nomeArquivo, resultadoTempos);
-        // AplicativoTeste.gravarTempoPesquisa(String tipoPesquisa, String nomeArquivo, double[] tempoResultados)
     }
 
-    private static void pesquisarAVL (String nomeArquivo, ArvoreAVL arvore) {
+    private static void pesquisarAVL (String nomeArquivo, ArvoreAVL arvoreAVL) {
 
-        NoAVL noPesquisa = new NoAVL();
+        NoAVL noPesquisa;
         GravaDados gravarArquivo = null;
         double totalCompras = 0;
         SimpleDateFormat dataSimples = new SimpleDateFormat("dd/MM/yyyy");
 
         try {
         
-            gravarArquivo = new GravaDados("TrabalhoC3/ResultadoCompras/ArvoreAVL" +nomeArquivo, false);
+            gravarArquivo = new GravaDados("TrabalhoC3/ResultadoCompras/ArvoreAVL_" +nomeArquivo, false);
 
         } catch (Exception erro) {
 
@@ -47,7 +48,7 @@ public class ExecucaoAVL {
 
         for (int contadorCPF = 0; contadorCPF < AplicativoTeste.listaCPFs.size(); contadorCPF++) {
 
-            noPesquisa = arvore.pesquisa(AplicativoTeste.listaCPFs.get(contadorCPF));
+            noPesquisa = arvoreAVL.pesquisa(AplicativoTeste.listaCPFs.get(contadorCPF));
 
             if (noPesquisa != null) {
 
@@ -70,4 +71,5 @@ public class ExecucaoAVL {
             }
         }
     }
+
 }

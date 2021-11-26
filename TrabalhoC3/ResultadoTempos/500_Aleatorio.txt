@@ -1,0 +1,36 @@
+Resultados para a pesquisa em Árvore ABB (os resultados estão em segundos):
+
+	Tempo da 1° Execução: 0.0572952
+	Tempo da 2° Execução: 0.0263534
+	Tempo da 3° Execução: 0.0218339
+	Tempo da 4° Execução: 0.0178477
+	Tempo da 5° Execução: 0.0122741
+
+O tempo médio final é: 0.02712086
+
+---------------------------------------------------------------------------------
+
+Resultados para a pesquisa em Árvore AVL (os resultados estão em segundos):
+
+	Tempo da 1° Execução: 0.0099774
+	Tempo da 2° Execução: 0.0045194
+	Tempo da 3° Execução: 0.0038367
+	Tempo da 4° Execução: 0.0032298
+	Tempo da 5° Execução: 0.0034625
+
+O tempo médio final é: 0.00500516
+
+---------------------------------------------------------------------------------
+
+Resultados para a pesquisa em Lista Hash (os resultados estão em segundos):
+
+	Tempo da 1° Execução: 0.0073003
+	Tempo da 2° Execução: 0.0044159
+	Tempo da 3° Execução: 0.0037542
+	Tempo da 4° Execução: 0.0038757
+	Tempo da 5° Execução: 0.0035402
+
+O tempo médio final é: 0.00457726
+
+---------------------------------------------------------------------------------
+

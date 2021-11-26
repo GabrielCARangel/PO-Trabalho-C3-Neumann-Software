@@ -19,4 +19,5 @@ public class ClienteEspecial extends Cliente {
 
         this.valeCompra = novoValeCompra;
     }    
+    
 }

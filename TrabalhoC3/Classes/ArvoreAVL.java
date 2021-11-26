@@ -13,7 +13,12 @@ public class ArvoreAVL {
 
     public void inserir(Compra elemento) {
 
-        this.raiz = this.inserirRaiz(elemento, this.raiz);
+        NoAVL no = this.pesquisa(elemento.getCliente().getCPF());
+        if(no != null){
+            no.adicionar(elemento);
+        }else{
+            this.raiz = this.inserirRaiz(elemento, this.raiz); 
+        }
     }
 
     private NoAVL inserirRaiz(Compra elemento, NoAVL no) {
@@ -37,9 +42,6 @@ public class ArvoreAVL {
                 no.setItemDireita(this.inserirRaiz(elemento, no.getItemDireita()));
                 no = this.balancearEsquerda(no);
 
-            } else {
-
-                no.adicionar(elemento);
             }
         }
 

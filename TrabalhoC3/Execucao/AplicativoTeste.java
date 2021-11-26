@@ -12,7 +12,6 @@ public class AplicativoTeste {
 	static String quebraDeLinha = "\n\n---------------------------------------------------------------------------------\n\n";
 	static CadastraCompra compra = new CadastraCompra();
 
-	/* Concluidos */
     public static void main (String[] args) {
 
 		executarPrograma();
@@ -29,7 +28,7 @@ public class AplicativoTeste {
 		
 		System.out.print("\n\nExecutando os métodos de pesquisa em 500 dados aleatórios.");	
         lerDados(compra, "TrabalhoC3/Dados/500_Aleatorios.txt");	
-		execucaoTipoLote("500_Aleatorio.txt");
+		execucaoTipoLote("500_Aleatorios.txt");
 
 		System.out.print("\nExecutando os métodos de pesquisa em 500 dados invertidos.");
         lerDados(compra, "TrabalhoC3/Dados/500_Invertidos.txt");	
@@ -93,13 +92,20 @@ public class AplicativoTeste {
 	}
 
 	private static void execucaoTipoLote (String nomeArquivo) {
-		try{
+
+		double[] auxiliar = null;
+
+		try {
+		
 			ExecucaoABB.executarABB(nomeArquivo);
-		}catch(StackOverflowError e){
-			System.out.print(e.getMessage());
-		}
-		ExecucaoAVL.executarAVL(nomeArquivo);
-		ExecucaoHash.executarHash(nomeArquivo);
+		
+		} catch (StackOverflowError erro) {
+
+            AplicativoTeste.gravarTempoPesquisa("Árvore ABB", nomeArquivo, auxiliar, false);
+        }
+		
+			ExecucaoAVL.executarAVL(nomeArquivo);
+			ExecucaoHash.executarHash(nomeArquivo);
 	}
 	
 	private static void lerDados (CadastraCompra compra, String nomeLeitura) {
@@ -138,7 +144,7 @@ public class AplicativoTeste {
 		return listaCPFs;
 	}
 
-	public static void gravarTempoPesquisa (String tipoPesquisa, String nomeArquivo, double[] tempoResultados) {
+	public static void gravarTempoPesquisa (String tipoPesquisa, String nomeArquivo, double[] tempoResultados, boolean controle) {
 
 		Double auxiliarMedia = 0.0;
 		String arquivoResultados = "TrabalhoC3/ResultadoTempos/" +nomeArquivo;
@@ -146,23 +152,34 @@ public class AplicativoTeste {
 
 		try {
 
-			GravaDados gravarResultados = new GravaDados(arquivoResultados, true);
-			gravarResultados.gravar("Resultados para a pesquisa em " +tipoPesquisa +" (os resultados estão em segundos):" +"\n\n");
+			if (controle == true) {
 
-			for (byte contador = 0; contador < tempoResultados.length; contador++) {
+				GravaDados gravarResultados = new GravaDados(arquivoResultados, true);
+				gravarResultados.gravar("Resultados para a pesquisa em " +tipoPesquisa +" (os resultados estão em segundos):" +"\n\n");
 
-				gravarResultados.gravar("	Tempo da " +(contador + 1) +"° Execução: " +(Double.toString((tempoResultados[contador]) / 1e+9)) +"\n");
-				auxiliarMedia += tempoResultados[contador];
-			}
+				for (byte contador = 0; contador < tempoResultados.length; contador++) {
+
+					gravarResultados.gravar("	Tempo da " +(contador + 1) +"° Execução: " +(Double.toString((tempoResultados[contador]) / 1e+9)) +"\n");
+					auxiliarMedia += tempoResultados[contador];
+				}
+				
+				auxiliarMedia = ((auxiliarMedia/tempoResultados.length) / 1e+9);
+				gravarResultados.gravar("\n" +"O tempo médio final é: " +Double.toString(auxiliarMedia));
+				gravarResultados.gravar(quebraDeLinha);
+				gravarResultados.fechar();
 			
-			auxiliarMedia = ((auxiliarMedia/tempoResultados.length) / 1e+9);
-			gravarResultados.gravar("\n" +"O tempo médio final é: " +Double.toString(auxiliarMedia));
-			gravarResultados.gravar(quebraDeLinha);
-			gravarResultados.fechar();
+			} else {
+
+				GravaDados gravarResultados = new  GravaDados(arquivoResultados, true);
+				gravarResultados.gravar("Não foi possível executar o método de pesquisa " +tipoPesquisa +".");
+				gravarResultados.gravar(quebraDeLinha);
+				gravarResultados.fechar();
+			}
 
 		} catch (IOException erro) {
 
 			System.err.print(erro);
 		}
 	}
+
 }

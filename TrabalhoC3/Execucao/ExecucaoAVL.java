@@ -8,14 +8,13 @@ public class ExecucaoAVL {
 
     public static void executarAVL (String nomeArquivo) {
 
-        ArvoreAVL arvoreAVL;
         double[] resultadoTempos = new double[5];
         double tempoInicial = 0, tempoFinal = 0;
 
         for (byte contador = 0; contador < resultadoTempos.length; contador++) {
 
             tempoInicial = System.nanoTime();
-            arvoreAVL = new ArvoreAVL();
+            ArvoreAVL arvoreAVL = new ArvoreAVL();
             
             for (int contadorInsercao = 0; contadorInsercao < AplicativoTeste.compra.getVetorCompra().size(); contadorInsercao++) {
 
@@ -27,7 +26,7 @@ public class ExecucaoAVL {
             resultadoTempos[contador] = tempoFinal - tempoInicial;
         }
 
-        AplicativoTeste.gravarTempoPesquisa("Árvore AVL", nomeArquivo, resultadoTempos);
+        AplicativoTeste.gravarTempoPesquisa("Árvore AVL", nomeArquivo, resultadoTempos, true);
     }
 
     private static void pesquisarAVL (String nomeArquivo, ArvoreAVL arvoreAVL) {

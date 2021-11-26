@@ -8,11 +8,11 @@ import java.text.SimpleDateFormat;
 public class ExecucaoABB {
 
     public static void executarABB (String nomeArquivo) {
-        try{
-            ArvoreABB arvoreBalanceada;
-            ArrayList<NoABB> vetorOrdenado = new ArrayList<>();
-            double[] resultadoTempos = new double[5];
-            double tempoInicial = 0, tempoFinal = 0;
+
+        ArvoreABB arvoreBalanceada;
+        ArrayList<NoABB> vetorOrdenado = new ArrayList<>();
+        double[] resultadoTempos = new double[5];
+        double tempoInicial = 0, tempoFinal = 0;
 
             for (byte contador = 0; contador < resultadoTempos.length; contador++) {
 
@@ -32,10 +32,8 @@ public class ExecucaoABB {
                 resultadoTempos[contador] = tempoFinal - tempoInicial;
             }
 
-            AplicativoTeste.gravarTempoPesquisa("Árvore ABB", nomeArquivo, resultadoTempos);
-        }catch(StackOverflowError e){
-            System.out.print("\nABB StackOverflow");
-        }
+            AplicativoTeste.gravarTempoPesquisa("Árvore ABB", nomeArquivo, resultadoTempos, true);
+            
     }
 
     private static void pesquisarABB (String nomeArquivo, ArvoreABB arvoreBalanceada) {

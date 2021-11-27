@@ -116,19 +116,17 @@ public class ArvoreABB {
         if (fim >= inicio) {
 
             meio = fim + inicio / 2;
-            //mudar
-            vetor.get(meio).getInformacao().forEach((compra) -> arvore.inserir(compra));
+            adicionar(vetor, arvore, meio);
             fazerBalanceamento(vetor, arvore, inicio, meio - 1);
             fazerBalanceamento(vetor, arvore, meio + 1, fim);
         }
     }
+    
+    public void adicionar(ArrayList<NoABB> vetor, ArvoreABB arvore, int meio) {
+        NoABB no = vetor.get(meio);
 
-    /* Pega todas as posições do ArrayList que está no nó da arvore. */
-    public void pegarTodos(ArrayList<Compra> vetor, NoABB no) {
-
-        for (int contador = 0; contador < no.getInformacao().size(); contador++) {
-
-            vetor.add(no.getInformacao().get(contador));
+        for(int contador = 0; contador < no.getInformacao().size(); contador++){
+            arvore.inserir(no.getInformacao().get(contador));
         }
     }
 }

@@ -24,6 +24,6 @@ public class NoHash {
     public void add (Compra novaCompra) {
 
         this.listaFilha.add(novaCompra);
-
     }
+    
 }

@@ -10,11 +10,6 @@ public class GravaDados {
 	public GravaDados (String nomeArquivo, boolean inserirNoFinal) throws IOException {
 
 		try {
-			/*
-			Para somente inserir novos dados no final do arquivo passe TRUE;
-			Caso seja para sobrescrever o arquivo passe FALSE.
-			Quando não existir um arquivo com o nome passado, um novo será criado.
-			*/
 
 			auxiliarDados = new FileWriter(new File(nomeArquivo), inserirNoFinal);
 			inserirDados = new PrintWriter(auxiliarDados);
@@ -28,7 +23,7 @@ public class GravaDados {
 
 	public void gravar (String novoDado) {
 
-			this.inserirDados.print(novoDado);
+		this.inserirDados.print(novoDado);
 	}
 
 	public void fechar () throws IOException {

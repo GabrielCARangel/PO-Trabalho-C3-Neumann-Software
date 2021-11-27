@@ -1,6 +1,5 @@
 package TrabalhoC3.Classes;
 
-/* Classe genérica */
 public class Cliente {
 
     private String nome;
@@ -31,4 +30,5 @@ public class Cliente {
 
         this.CPF = novoCPF;
     }
+
 }

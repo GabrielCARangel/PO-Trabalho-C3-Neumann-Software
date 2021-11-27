@@ -2,7 +2,6 @@ package TrabalhoC3.Classes;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-
 import TrabalhoC3.Interfaces.*;
 
 public class CadastraCompra implements Vetor, Ordernacao {
@@ -46,17 +45,9 @@ public class CadastraCompra implements Vetor, Ordernacao {
                 vetorCompra.remove(contador);
                 contador--;
             }
-
-            /*
-            if (vetorCompra.get(i).getCliente().getCPF().equals(CPF) && vetorCompra.get(i).getData() == data) {
-                vetorCompra.remove(i);
-                i--;
-            }
-            */
         }
     }
 
-    /* Ordenações */
     @Override
     public void insercaoDireta () {
 
@@ -126,6 +117,7 @@ public class CadastraCompra implements Vetor, Ordernacao {
         pivo = this.vetorCompra.get((auxiliar01 + auxiliar02) / 2);
         
         do {
+            
             while (verificarMaior(auxiliar01, pivo) == -1) {
                 auxiliar01++;
             }
@@ -168,6 +160,7 @@ public class CadastraCompra implements Vetor, Ordernacao {
         pivo = this.vetorCompra.get((auxiliar01 + auxiliar02) / 2);
         
         do {
+
             while (verificarMaior(auxiliar01, pivo) == -1) {
                 auxiliar01++;
             }
@@ -190,9 +183,11 @@ public class CadastraCompra implements Vetor, Ordernacao {
         if (esquerda < auxiliar02) {
         
             if ((auxiliar02 - esquerda) <= 20) {
+            
                 insercaoDiretaModificada(esquerda, auxiliar02);
         
             } else {
+            
                 fazerQuickInsercao(esquerda, auxiliar02);
             }
         }
@@ -200,9 +195,11 @@ public class CadastraCompra implements Vetor, Ordernacao {
         if (direita > auxiliar01) {
         
             if ((direita - auxiliar01) <= 20) {
+            
                 insercaoDiretaModificada(auxiliar01, direita);
         
             } else {
+            
                 fazerQuickInsercao(auxiliar01, direita);
             }
         }
@@ -232,28 +229,25 @@ public class CadastraCompra implements Vetor, Ordernacao {
     public int verificarMaior (int auxiliar, Compra temporario) {
 
         if (this.vetorCompra.get(auxiliar).getCliente().getCPF() > temporario.getCliente().getCPF()) {
+            
             return 1;
 
         } else if (this.vetorCompra.get(auxiliar).getCliente().getCPF() < temporario.getCliente().getCPF()) {
+            
             return -1;
-
-        /*
-        if (this.vetorCompra.get(j).getCliente().getCPF().compareTo(temp.getCliente().getCPF()) > 0) {
-            return 1;
-
-        } else if (this.vetorCompra.get(j).getCliente().getCPF().compareTo(temp.getCliente().getCPF()) < 0) {
-            return -1;
-        */
 
         } else {
         
             if (this.vetorCompra.get(auxiliar).getData().compareTo(temporario.getData()) > 0) {
+            
                 return 1;
         
             } else if (this.vetorCompra.get(auxiliar).getData().compareTo(temporario.getData()) < 0) {
+            
                 return -1;
         
             } else {
+            
                 return 0;
             }
         }

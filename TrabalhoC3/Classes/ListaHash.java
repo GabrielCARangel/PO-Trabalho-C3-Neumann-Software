@@ -6,8 +6,6 @@ public class ListaHash {
 
     private NoHash[] listaHashing;
 
-    /* tamanhoLista tem que ser 10% a mais que a quantidade de elementos e ser um número primo */
-
     public ListaHash (int tamanhoLista) {
 
         listaHashing = new NoHash [tamanhoLista];
@@ -22,7 +20,6 @@ public class ListaHash {
 
         int valorHashing = (int) valorHash(novaCompra.getCliente().getCPF());
         listaHashing[valorHashing].add(novaCompra);
-
     }
 
     public ArrayList<Compra> pesquisarCPF (long CPF) {

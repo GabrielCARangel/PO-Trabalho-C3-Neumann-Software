@@ -5,7 +5,6 @@ import java.util.ArrayList;
 public class ArvoreABB {
 
     private NoABB raiz;
-    /* Opcional */
     private int numeroElementos;
 
     public ArvoreABB() {
@@ -16,9 +15,11 @@ public class ArvoreABB {
     public boolean eVazia() {
 
         if (this.raiz == null) {
+
             return true;
 
         } else {
+
             return false;
         }
     }
@@ -41,12 +42,15 @@ public class ArvoreABB {
     private NoABB fazerPesquisa(long CPF, NoABB no) {
 
         if (no == null) {
+
             return null;
 
         } else if (CPF < no.getCPF()) {
+
             no = fazerPesquisa(CPF, no.getEsquerda());
 
         } else if (CPF > no.getCPF()) {
+
             no = fazerPesquisa(CPF, no.getDireita());
         }
 
@@ -57,7 +61,6 @@ public class ArvoreABB {
 
         this.raiz = fazerInsercao(elemento, this.raiz);
         return true;
-
     }
 
     private NoABB fazerInsercao(Compra elemento, NoABB no) {
@@ -72,12 +75,15 @@ public class ArvoreABB {
         } else {
 
             if (elemento.getCliente().getCPF() > no.getCPF()) {
+
                 no.setDireita(fazerInsercao(elemento, no.getDireita()));
 
             } else if (elemento.getCliente().getCPF() < no.getCPF()) {
+
                 no.setEsquerda(fazerInsercao(elemento, no.getEsquerda()));
 
             } else {
+
                 no.adicionar(elemento);
             }
         }
@@ -116,17 +122,18 @@ public class ArvoreABB {
         if (fim >= inicio) {
 
             meio = fim + inicio / 2;
-            adicionar(vetor, arvore, meio);
+            vetor.get(meio).getInformacao().forEach((compra) -> arvore.inserir(compra));
             fazerBalanceamento(vetor, arvore, inicio, meio - 1);
             fazerBalanceamento(vetor, arvore, meio + 1, fim);
         }
     }
-    
-    public void adicionar(ArrayList<NoABB> vetor, ArvoreABB arvore, int meio) {
-        NoABB no = vetor.get(meio);
 
-        for(int contador = 0; contador < no.getInformacao().size(); contador++){
-            arvore.inserir(no.getInformacao().get(contador));
+    public void pegarTodos(ArrayList<Compra> vetor, NoABB no) {
+
+        for (int contador = 0; contador < no.getInformacao().size(); contador++) {
+
+            vetor.add(no.getInformacao().get(contador));
         }
     }
+
 }

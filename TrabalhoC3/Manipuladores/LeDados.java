@@ -14,10 +14,12 @@ public class LeDados {
 	public LeDados (String nomeArquivo) throws FileNotFoundException {
 
 		try {
+
 			this.entrada = new Scanner(new File(nomeArquivo));
 		}
 
 		catch (FileNotFoundException excessao) {
+
 			throw new FileNotFoundException("O arquivo não foi encontrado.");
 		}
 	}
@@ -82,7 +84,6 @@ public class LeDados {
 				Cliente novoCliente = new Cliente(dados[0], cpf);
 
 				return (new Compra(novoCliente, data, valor));
-
 			}
 
 		} catch (ArrayIndexOutOfBoundsException erro) {

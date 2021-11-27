@@ -20,7 +20,6 @@ public class AplicativoTeste {
 
 	private static void executarPrograma () {
 		
-		/* Depois inserir aqui execução individual. */
 		execucaoLote();
 	}
 
@@ -88,7 +87,6 @@ public class AplicativoTeste {
 		
 		System.out.print("\n\nTodos os dados de clientes estão contidos na pasta 'ResultadoCompras'.");
 		System.out.print("\nTodos os tempos e resultados finais estão contidos na pasta 'ResultadoTempos'.");
-		
 	}
 
 	private static void execucaoTipoLote (String nomeArquivo) {
@@ -104,13 +102,14 @@ public class AplicativoTeste {
             AplicativoTeste.gravarTempoPesquisa("Árvore ABB", nomeArquivo, auxiliar, false);
         }
 		
-			ExecucaoAVL.executarAVL(nomeArquivo);
-			ExecucaoHash.executarHash(nomeArquivo);
+		ExecucaoAVL.executarAVL(nomeArquivo);
+		ExecucaoHash.executarHash(nomeArquivo);
 	}
 	
 	private static void lerDados (CadastraCompra compra, String nomeLeitura) {
 		
 		try {
+
 			LeDados arquivo = new LeDados(nomeLeitura);
 			compra.setVetorCompra(arquivo.ler());
 			arquivo.fecha();
@@ -134,10 +133,12 @@ public class AplicativoTeste {
 		ArrayList<Long> listaCPFs = new ArrayList<>();
 
 		try {
+
 			LeDados arquivo = new LeDados("TrabalhoC3/Dados/ListaCPFs.txt");
 			listaCPFs = arquivo.lerCPF();
 		
 		} catch (FileNotFoundException erro) {
+			
 			System.err.print(erro);
 		}
 	

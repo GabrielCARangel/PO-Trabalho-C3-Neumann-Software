@@ -14,9 +14,13 @@ public class ArvoreAVL {
     public void inserir(Compra elemento) {
 
         NoAVL no = this.pesquisa(elemento.getCliente().getCPF());
-        if(no != null){
+
+        if (no != null) {
+        
             no.adicionar(elemento);
-        }else{
+        
+        } else {
+        
             this.raiz = this.inserirRaiz(elemento, this.raiz); 
         }
     }
@@ -28,6 +32,7 @@ public class ArvoreAVL {
             NoAVL novoNo = new NoAVL(elemento.getCliente().getCPF());
             novoNo.adicionar(elemento);
             this.controle = true;
+
             return novoNo;
 
         } else {
@@ -56,9 +61,11 @@ public class ArvoreAVL {
     private NoAVL pesquisaAVL(long elemento, NoAVL no) {
 
         if (no == null) {
+
             return null;
 
         } else {
+
             if (elemento < no.getCPF()) {
                 no = pesquisaAVL(elemento, no.getItemEsquerdo());
 
@@ -77,16 +84,16 @@ public class ArvoreAVL {
             switch (no.getFatorBalanceamento()) {
 
             case -1:
-                no = this.rotacaoDireita(no);
+                    no = this.rotacaoDireita(no);
                 break;
 
             case 0:
-                no.setFatorBalanceamento((byte) -1);
+                    no.setFatorBalanceamento((byte) -1);
                 break;
 
             case 1:
-                no.setFatorBalanceamento((byte) 0);
-                this.controle = false;
+                    no.setFatorBalanceamento((byte) 0);
+                    this.controle = false;
                 break;
 
             }
@@ -98,20 +105,21 @@ public class ArvoreAVL {
     private NoAVL balancearEsquerda(NoAVL no) {
 
         if (this.controle) {
+
             switch (no.getFatorBalanceamento()) {
 
-            case -1:
-                no.setFatorBalanceamento((byte) 0);
-                this.controle = false;
-                break;
+                case -1:
+                    no.setFatorBalanceamento((byte) 0);
+                    this.controle = false;
+                    break;
 
-            case 0:
-                no.setFatorBalanceamento((byte) 1);
-                break;
+                case 0:
+                    no.setFatorBalanceamento((byte) 1);
+                    break;
 
-            case 1:
-                no = this.rotacaoEsquerda(no);
-                break;
+                case 1:
+                    no = this.rotacaoEsquerda(no);
+                    break;
             }
         }
 
@@ -129,6 +137,7 @@ public class ArvoreAVL {
             auxiliar01.setItemDireita(no);
             no.setFatorBalanceamento((byte) 0);
             no = auxiliar01;
+
         } else {
 
             auxiliar02 = auxiliar01.getItemDireita();
@@ -140,6 +149,7 @@ public class ArvoreAVL {
             if (auxiliar02.getFatorBalanceamento() == -1) {
 
                 no.setFatorBalanceamento((byte) 1);
+
             } else {
 
                 no.setFatorBalanceamento((byte) 0);
@@ -148,6 +158,7 @@ public class ArvoreAVL {
             if (auxiliar02.getFatorBalanceamento() == 1) {
 
                 auxiliar01.setFatorBalanceamento((byte) -1);
+
             } else {
 
                 auxiliar01.setFatorBalanceamento((byte) 0);
@@ -188,8 +199,8 @@ public class ArvoreAVL {
             } else {
 
                 no.setFatorBalanceamento((byte) 0);
-
             }
+
             if (auxiliar02.getFatorBalanceamento() == -1) {
 
                 auxiliar01.setFatorBalanceamento((byte) 1);
@@ -199,6 +210,7 @@ public class ArvoreAVL {
                 auxiliar01.setFatorBalanceamento((byte) 0);
                 
             }
+            
             no = auxiliar02;
         }
 

@@ -32,8 +32,7 @@ public class ExecucaoABB {
                 resultadoTempos[contador] = tempoFinal - tempoInicial;
             }
 
-            AplicativoTeste.gravarTempoPesquisa("Árvore ABB", nomeArquivo, resultadoTempos, true);
-            
+            AplicativoTeste.gravarTempoPesquisa("Árvore ABB", nomeArquivo, resultadoTempos, true);     
     }
 
     private static void pesquisarABB (String nomeArquivo, ArvoreABB arvoreBalanceada) {

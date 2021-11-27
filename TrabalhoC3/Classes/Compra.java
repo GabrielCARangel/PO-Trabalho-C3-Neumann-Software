@@ -65,4 +65,5 @@ public class Compra {
                 +date.format(data.getTime())+";"
                 +this.valor+"\n";
     }
+    
 }
